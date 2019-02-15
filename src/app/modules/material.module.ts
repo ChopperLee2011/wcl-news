@@ -6,13 +6,15 @@ import {MatSidenavModule,
   MatIconModule,
   MatCardModule,
   MatListModule} from '@angular/material';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   imports: [ MatTableModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatIconModule,
-    MatListModule,  MatCardModule,
+    MatListModule,  MatPaginatorModule, MatCardModule
  ],
   exports: [ MatTableModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatIconModule,
-    MatListModule,  MatCardModule,
+    MatListModule,  MatPaginatorModule, MatCardModule
  ]
 })
 export class MaterialModule {}

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map, of } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import * as news from './data.json';
 import {News} from '../modules/News';
 
 @Injectable({
@@ -17,9 +16,8 @@ export class NewsService {
   }
 
   getNews(): Observable<News[]>{
-    // return of<News[]>(news.default);
     // @ts-ignore
-    return lazyFetch(`${this.baseUrl}/v0/topstories.json?print=pretty&orderBy="$key"&limitToFirst=10`);
+    return lazyFetch(`${this.baseUrl}/v0/topstories.json?print=pretty&orderBy="$key"&limitToFirst=50`);
   }
 }
 

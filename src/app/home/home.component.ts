@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { DataSource } from '@angular/cdk/table';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 import { AuthService } from '../services/auth.service';
 import { NewsService } from '../services/news.service';
@@ -11,26 +10,26 @@ import { News } from '../modules/News';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
-export class HomeComponent {
-
-  displayedColumns = ['title'];
-  dataSource = new NewsDataSource(this.newsService);
-
+export class HomeComponent implements OnInit{
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(public auth: AuthService, private newsService: NewsService) { }
 
-}
+  displayedColumns = ['title'];
+  dataSource: MatTableDataSource<News>;
+  newsList: News [];
+  pageSize = 20;
 
-export class NewsDataSource extends DataSource<any> {
-  constructor(private newsService: NewsService) {
-    super();
+  ngOnInit() {
+    this.getNews();
   }
 
-  connect(): Observable<News []> {
-    console.log('connecting', this.newsService.getNews());
-    return this.newsService.getNews();
+  getNews(): void {
+    this.newsService.getNews().subscribe(news => {
+      this.newsList = news;
+      this.dataSource = new MatTableDataSource(this.newsList);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
-  disconnect() {
 
-  }
 }

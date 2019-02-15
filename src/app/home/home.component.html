@@ -1,20 +1,18 @@
 <div class="container">
-  <div fxLayout="row" fxLayoutAlign="center center" class="content">
-    <mat-card class="card" >
-      <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-      </mat-card-title>
-      <mat-card-content>
-        <div class="example-container mat-elevation-z8">
+  <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="content mat-elevation-z8">
+          <mat-paginator [pageSize]="pageSize" showFirstLastButtons></mat-paginator>
           <mat-table #table [dataSource]="dataSource">
             <ng-container matColumnDef="title">
-              <mat-header-cell *matHeaderCellDef hidden="hidden"> Title </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef style="display: none;"> Title </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <wcl-item [item]="element"></wcl-item>
+              </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
         </div>
-      </mat-card-content>
-    </mat-card>
   </div>
+  <footer></footer>
 </div>

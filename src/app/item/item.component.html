@@ -1,3 +1,5 @@
-<p>
-  item works!
-</p>
+<mat-list-item class="md-2-line" *ngIf="item">
+  <div class="mat-body-2">{{item.title}} </div>
+  <div class="mat-caption"> by {{item.by}} | {{item.descendants}} comments</div>
+
+</mat-list-item>
